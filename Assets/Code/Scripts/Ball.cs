@@ -37,7 +37,7 @@ public class Ball : MonoBehaviour
     {
         if (isThrow)
         {
-            rb.isKinematic = false;
+            rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(variable.Value * p, ForceMode2D.Force);
             isThrow = false;
         }
@@ -68,7 +68,7 @@ public class Ball : MonoBehaviour
 
             isLose = false;
             this.transform.position = defaultPosition;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
             isThrow = true;
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
@@ -86,6 +86,8 @@ public class Ball : MonoBehaviour
     {
         this.transform.position = new Vector2(0,-100);
         isThrow = false;
-        rb.isKinematic = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
     }
 }
