@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
     {
         Init();
     }
-    public void OnLevelStart()
+    public void OnNextLevel()
     {
        isPlaying = true;
-        time = 90;
+        time = levelVariable.currentMaxTime;
+        scoredText.text = "Score: 0/" + levelVariable.currentTarget.ToString();
     }
     public void Update()
     {
@@ -36,8 +37,7 @@ public class GameManager : MonoBehaviour
     {
         levelVariable.Init();
         isPlaying =false;
-        timeText.text = "Time: 90s";
-        levelText.text ="Level: "+ levelVariable.currentLevel.ToString();
+        timeText.text = "Time: " +levelVariable.currentMaxTime.ToString() ;
         scoredText.text = "Score: 0/" + levelVariable.currentTarget.ToString();
     }
     private void OnGameOver()
@@ -51,11 +51,8 @@ public class GameManager : MonoBehaviour
         if(levelVariable.isWin)
         {
             levelVariable.nextLevel();
+            OnNextLevel();
             NextLevel.Invoke();
-            isPlaying = false;
-            timeText.text = "Time: 90s";
-            levelText.text  = "Level: " + levelVariable.currentLevel.ToString();
-            scoredText.text = "Score: 0/" + levelVariable.currentTarget.ToString();
         }
         else
         {

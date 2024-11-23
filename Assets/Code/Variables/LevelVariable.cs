@@ -8,10 +8,10 @@ public class LevelVariable : ScriptableObject
     [Multiline]
     public string DeveloperDescription = "";
     #endif
-    public List<int> target;
-    public int currentLevel;
+
+    public float currentMaxTime;
     public int currentScore;
-    public int currentTarget => target[currentLevel-1];
+    public int currentTarget;
     public bool isWin => currentScore == currentTarget;
     public bool scored()
     {
@@ -20,12 +20,14 @@ public class LevelVariable : ScriptableObject
     }
     public void Init()
     {
-        currentLevel = 1;
+        currentMaxTime = 60;
         currentScore = 0;
+        currentTarget = 3;
     }
     public void nextLevel()
     {
-        currentLevel++;
+        currentMaxTime+=15;
         currentScore = 0;
+        currentTarget++;
     }
 }
